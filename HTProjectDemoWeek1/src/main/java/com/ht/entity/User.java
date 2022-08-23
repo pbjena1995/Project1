@@ -2,14 +2,20 @@ package com.ht.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class User {
 	
 	@Id
 	private int id;
+	@Min(value=1, message="Most Greater than 1")
 	private int age;
+	@NotBlank(message="Most not blank")
 	private String name;
+	
+	private String address;
 	
 	
 	public int getId() {
@@ -30,6 +36,14 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 	
 	
 

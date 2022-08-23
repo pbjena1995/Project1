@@ -22,4 +22,9 @@ public class UserService {
 	public List<User> getAllUser() {
 		return userRepo.findAll();
 	}
+
+//	public void updateUser(int id) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }
