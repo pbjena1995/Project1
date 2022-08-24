@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,20 +27,23 @@ import com.ht.entity.User;
 import com.ht.service.UserService;
 
 @RestController
-@RequestMapping("/UserController")
+@RequestMapping("/user")
 public class UserController {
 	
 	
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("/saveuser")
-	public int saveUser(@Valid @RequestBody User user) {
+	@PostMapping("/save")
+	public ResponseEntity saveUser(@Valid @RequestBody User user) {
 			userService.saveUser(user);
-			return user.getId();
+			MultiValueMap<String,String> map=new LinkedMultiValueMap<String,String>();
+			map.add("header", "success");
+			ResponseEntity res=new ResponseEntity(map,HttpStatus.CREATED);
+			return res;
 	}
 	
-	@GetMapping("/getuser")
+	@GetMapping("/get")
 	public List<User> getAllUser(){
 			return userService.getAllUser();		
 	}
