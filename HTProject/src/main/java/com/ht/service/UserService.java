@@ -27,4 +27,12 @@ public class UserService {
 //		// TODO Auto-generated method stub
 //		
 //	}
+	
+	public User save(User user) {
+		if (user.getName().equals("Ram"))
+			throw new IllegalArgumentException("message");
+		else
+			userRepo.save(user);
+		return user;
+	}
 }

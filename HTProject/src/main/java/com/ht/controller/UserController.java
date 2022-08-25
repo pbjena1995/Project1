@@ -35,12 +35,13 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("/save")
-	public ResponseEntity saveUser(@Valid @RequestBody User user) {
+	public Integer saveUser(@Valid @RequestBody User user) {
 			userService.saveUser(user);
-			MultiValueMap<String,String> map=new LinkedMultiValueMap<String,String>();
-			map.add("header", "success");
-			ResponseEntity res=new ResponseEntity(map,HttpStatus.CREATED);
-			return res;
+//			MultiValueMap<String,String> map=new LinkedMultiValueMap<String,String>();
+//			map.add("header", "success");
+//			ResponseEntity res=new ResponseEntity(map,HttpStatus.CREATED);
+//			return res;
+			return user.getAge();
 	}
 	
 	@GetMapping("/get")
@@ -65,4 +66,10 @@ public class UserController {
 		return error;
 	}
 
+	@PostMapping
+	Integer saveUser1(@Valid @RequestBody User user) {
+		userService.save(user);//mock
+		System.out.println("second");
+		return user.getId();
+	}
 }
